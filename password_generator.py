@@ -4,12 +4,14 @@ import tkinter as tk
 
 def write_password(password, name, url) -> None:
     src_file = open("src_file.txt", "r")
-    src_file.readline()
-    path = src_file.readline()
+    next(src_file)
+    path = src_file.readline() # Skips the first line
+    src_file.close()
     f = open(path, "a")
     f.write(name + ":" + "\n")
     f.write(password + "\n")
     f.write("URL -> " + url + "\n\n")
+    f.close()
     return 
 
 def check_password(password: str) -> bool:
@@ -41,7 +43,6 @@ def create_password(name, url) -> bool:
         if check_password(password):
             write_password(password, name, url)
             return True
-
 
 def main() -> None:
     root = tk.Tk()
